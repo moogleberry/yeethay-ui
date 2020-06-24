@@ -40,14 +40,14 @@ class Rate extends React.Component {
 
 	updateRatingDescription(value) {
 		console.log(value, this);
-		// let newRating = Object.assign({}, this.state.rating);
-		// if(value) {
-		// 	newRating.description = this.getRatingDescription(value);
-		// 	this.setState({rating: newRating});
-		// } else {
-		// 	newRating.description = null;
-		// 	this.setState({rating: newRating});
-		// }
+		let newRating = Object.assign({}, this.state.rating);
+		if(value) {
+			newRating.description = this.getRatingDescription(value);
+			this.setState({rating: newRating});
+		} else {
+			newRating.description = null;
+			this.setState({rating: newRating});
+		}
 	}
 
 	render() {
@@ -58,7 +58,10 @@ class Rate extends React.Component {
 				</h2>
 				<div>
 					<ItemPanel item={this.state.item}></ItemPanel>
-					<RatingPanel rating={this.state.rating} onMouseEnter={ this.updateRatingDescription }></RatingPanel>
+					<RatingPanel 
+						rating={this.state.rating} 
+						hoverHandler={ this.updateRatingDescription.bind(this) }>
+					</RatingPanel>
 				</div>
 			</div>
 		);
