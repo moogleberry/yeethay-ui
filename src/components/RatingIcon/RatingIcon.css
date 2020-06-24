@@ -1,0 +1,15 @@
+.rating-icon {
+	margin: 15px;
+}
+
+.warming {
+	color: red;
+}
+
+.neutral, .not-highlighted {
+	color: slategrey;
+}
+
+.cooling {
+	color: deepskyblue;
+}
