@@ -9,15 +9,15 @@ class RatingIcon extends React.Component {
 	render() {
 		if(this.props.value > 0 ) {
 			return (
-				<FontAwesomeIcon className='rating-icon warming' icon={ faFire } size='3x' />
+				<FontAwesomeIcon className='rating-icon warming fa-fw' icon={ faFire } size='3x' />
 			);
 		} else if(this.props.value < 0) {
 			return (
-				<FontAwesomeIcon className='rating-icon cooling' icon={ faSnowflake } size='3x' />
+				<FontAwesomeIcon className='rating-icon cooling fa-fw' icon={ faSnowflake } size='3x' />
 			);
 		} else {
 			return (
-				<FontAwesomeIcon className='rating-icon neutral' icon={ faCircle } size='3x' />
+				<FontAwesomeIcon className='rating-icon neutral fa-fw' icon={ faCircle } size='3x' />
 			);
 		}
 	}

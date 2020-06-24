@@ -1,22 +1,22 @@
 import React from 'react';
 import RatingButton from '../RatingButton/RatingButton.js'
 
-const RatingPanel = () => (
+const RatingPanel = (props) => (
   <div>
     <div>
-    	<RatingButton value='-3' />
-    	<RatingButton value='-2' />
-    	<RatingButton value='-1' />
+    	<RatingButton value='-3' rating={props.rating} onMouseEnter={ props.onMouseEnter } />
+    	<RatingButton value='-2' rating={props.rating} onMouseEnter={ props.onMouseEnter } />
+    	<RatingButton value='-1' rating={props.rating} onMouseEnter={ props.onMouseEnter } />
 
-    	<RatingButton value='0' />
+    	<RatingButton value='0' rating={props.rating} onMouseEnter={ props.onMouseEnter } />
 
-    	<RatingButton value='1' />
-    	<RatingButton value='2' />
-    	<RatingButton value='3' />
+    	<RatingButton value='1' rating={props.rating} onMouseEnter={ props.onMouseEnter } />
+    	<RatingButton value='2' rating={props.rating} onMouseEnter={ props.onMouseEnter } />
+    	<RatingButton value='3' rating={props.rating} onMouseEnter={ props.onMouseEnter } />
 	</div>
 
 	<div>
-		Hover Description
+		{props.rating.description}
 	</div>
   </div>
 );

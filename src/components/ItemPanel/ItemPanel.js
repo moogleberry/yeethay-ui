@@ -1,14 +1,15 @@
+import './ItemPanel.css';
 import React from 'react';
 
-const ItemPanel = () => (
+const ItemPanel = (props) => (
   <div>
   	
   	<div>
-    	Item Picture
+    	<img src={props.item.pictureUrl} className='item-image' alt={'Picture of ' + props.item.name} />
     </div>
 
-    <div>
-    	Item Name
+    <div className='item-name'>
+    	{props.item.name}
     </div>
     
   </div>
