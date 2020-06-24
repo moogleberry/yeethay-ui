@@ -2,14 +2,18 @@
 	margin: 10px;
 }
 
+.cooling {
+	color: deepskyblue;
+}
+
+.neutral {
+	color: darkslategrey;
+}
+
 .warming {
 	color: red;
 }
 
-.neutral, .not-highlighted {
+.not-highlighted {
 	color: slategrey;
-}
-
-.cooling {
-	color: deepskyblue;
 }

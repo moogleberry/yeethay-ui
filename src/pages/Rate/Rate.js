@@ -1,3 +1,4 @@
+import './Rate.css';
 import React from 'react';
 import ItemPanel from '../../components/ItemPanel/ItemPanel.js';
 import RatingPanel from '../../components/RatingPanel/RatingPanel.js';
@@ -32,6 +33,10 @@ class Rate extends React.Component {
 			"3": "A Lot Warming"
 		};
 
+		this.ratingOptions = [
+			-3, -2, -1, 0, 1, 2, 3
+		];
+
 	}
 
 	getRatingDescription(value) {
@@ -39,12 +44,13 @@ class Rate extends React.Component {
 	}
 
 	updateRatingDescription(value) {
-		console.log(value, this);
 		let newRating = Object.assign({}, this.state.rating);
-		if(value) {
+		if(value !== null) {
+			newRating.value = value;
 			newRating.description = this.getRatingDescription(value);
 			this.setState({rating: newRating});
 		} else {
+			newRating.value = null;
 			newRating.description = null;
 			this.setState({rating: newRating});
 		}
@@ -56,12 +62,15 @@ class Rate extends React.Component {
 				<h2 className='page-title'>
 					Is It Yeet Hay?
 				</h2>
+				<div className='rate-item-panel'>
+					<ItemPanel 
+						item={this.state.item} />
+				</div>
 				<div>
-					<ItemPanel item={this.state.item}></ItemPanel>
 					<RatingPanel 
+						ratingOptions={this.ratingOptions}
 						rating={this.state.rating} 
-						hoverHandler={ this.updateRatingDescription.bind(this) }>
-					</RatingPanel>
+						hoverHandler={ this.updateRatingDescription.bind(this) } />
 				</div>
 			</div>
 		);
