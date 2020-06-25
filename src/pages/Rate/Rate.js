@@ -15,32 +15,47 @@ class Rate extends React.Component {
 			rating: {
 				value: null,
 				description: null
-			}
+			},
+			ratingDescriptions: {},
+			ratingOptions: []
 		};
-
-		this.state.item = {
-			name: "Ginger",
-			pictureUrl: "https://files.nccih.nih.gov/files/ginger-ThinkstockPhotos-531052216-square.jpg"
-		};
-
-		this.ratingDescriptions = {
-			"-3": "A Lot Cooling",
-			"-2": "Cooling", 
-			"-1": "A Bit Cooling",
-			"0": "Neutral",
-			"1": "A Bit Warming",
-			"2": "Warming",
-			"3": "A Lot Warming"
-		};
-
-		this.ratingOptions = [
-			-3, -2, -1, 0, 1, 2, 3
-		];
 
 	}
 
+	componentDidMount() {
+		this.fetchRatingOptions()
+			.then(data => this.setRatingOptions(data));
+		this.fetchRatingDescriptions()
+			.then(data => this.setRatingDescriptions(data));
+		this.fetchDummyItem()
+			.then(data => this.setItem(data));
+	}
+
+	async fetchRatingOptions() {
+		let response = await fetch("/data/ratingOptions.json");
+		let data = await response.json();
+		return data;
+	}
+
+	async fetchRatingDescriptions() {
+		let response = await fetch("/data/ratingDescriptions.json");
+		let data = await response.json();
+		return data;
+	}
+
+	async fetchDummyItem() {
+		let response = await fetch("/data/ginger.json");
+		let data = await response.json();
+		return data;
+	}
+
 	getRatingDescription(value) {
-		return this.ratingDescriptions[value];
+		return this.state.ratingDescriptions[value];
+	}
+
+	setRatingDescriptions(obj) {
+		this.setState({ratingDescriptions: obj});
+		return obj;
 	}
 
 	updateRatingDescription(value) {
@@ -56,6 +71,20 @@ class Rate extends React.Component {
 		}
 	}
 
+	getRatingOptions(value) {
+		return this.ratingOptions;
+	}
+
+	setRatingOptions(arr) {
+		this.setState({ratingOptions: arr});
+		return arr;
+	}
+
+	setItem(obj) {
+		this.setState({item: obj});
+		return obj;
+	}
+
 	render() {
 		return (
 			<div>
@@ -68,7 +97,7 @@ class Rate extends React.Component {
 				</div>
 				<div>
 					<RatingPanel 
-						ratingOptions={this.ratingOptions}
+						ratingOptions={this.state.ratingOptions}
 						rating={this.state.rating} 
 						hoverHandler={ this.updateRatingDescription.bind(this) } />
 				</div>
