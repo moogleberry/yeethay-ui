@@ -2,10 +2,6 @@ import React from 'react';
 import Navigation from './Navigation.js';
 import Main from './Main.js';
 
-import 'jquery';
-import 'popper.js';
-import 'bootstrap';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
