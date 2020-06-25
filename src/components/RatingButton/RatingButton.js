@@ -11,7 +11,7 @@ const RatingButton = (props) => (
 
 		<RatingIcon 
 			buttonValue={props.buttonValue} 
-			rating={props.rating} />
+			userRating={props.userRating} />
 	</button>
 ); 
 

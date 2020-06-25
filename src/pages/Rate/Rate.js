@@ -1,6 +1,6 @@
 import './Rate.css';
 import React from 'react';
-import ItemPanel from '../../components/ItemPanel/ItemPanel.js';
+import RatingItemPanel from '../../components/RatingItemPanel/RatingItemPanel.js';
 import RatingPanel from '../../components/RatingPanel/RatingPanel.js';
 
 class Rate extends React.Component {
@@ -8,11 +8,11 @@ class Rate extends React.Component {
 		super(props);
 
 		this.state = {
-			item: {
+			ratingItem: {
 				name: null,
 				pictureUrl: null
 			},
-			rating: {
+			userRating: {
 				value: null,
 				description: null
 			},
@@ -28,7 +28,7 @@ class Rate extends React.Component {
 		this.fetchRatingDescriptions()
 			.then(data => this.setRatingDescriptions(data));
 		this.fetchDummyItem()
-			.then(data => this.setItem(data));
+			.then(data => this.setRatingItem(data));
 	}
 
 	async fetchRatingOptions() {
@@ -49,28 +49,28 @@ class Rate extends React.Component {
 		return data;
 	}
 
-	setRatingDescriptions(obj) {
-		this.setState({ratingDescriptions: obj});
-	}
-
 	setRatingOptions(arr) {
 		this.setState({ratingOptions: arr});
 	}
 
-	setItem(obj) {
-		this.setState({item: obj});
+	setRatingDescriptions(obj) {
+		this.setState({ratingDescriptions: obj});
+	}
+
+	setRatingItem(obj) {
+		this.setState({ratingItem: obj});
 	}
 
 	updateRating(value) {
-		let newRating = Object.assign({}, this.state.rating);
+		let newRating = Object.assign({}, this.state.userRating);
 		if(value !== null) {
 			newRating.value = value;
 			newRating.description = this.state.ratingDescriptions[value];
-			this.setState({rating: newRating});
+			this.setState({userRating: newRating});
 		} else {
 			newRating.value = null;
 			newRating.description = null;
-			this.setState({rating: newRating});
+			this.setState({userRating: newRating});
 		}
 	}
 
@@ -81,13 +81,13 @@ class Rate extends React.Component {
 					Is It Yeet Hay?
 				</h2>
 				<div className='rate-item-panel'>
-					<ItemPanel 
-						item={this.state.item} />
+					<RatingItemPanel 
+						ratingItem={this.state.ratingItem} />
 				</div>
 				<div>
 					<RatingPanel 
 						ratingOptions={this.state.ratingOptions}
-						rating={this.state.rating} 
+						userRating={this.state.userRating} 
 						hoverHandler={ this.updateRating.bind(this) } />
 				</div>
 			</div>

@@ -13,7 +13,7 @@ class RatingPanel extends React.Component {
 								<RatingButton 
 									key={buttonValue}
 									buttonValue={buttonValue} 
-									rating={this.props.rating} 
+									userRating={this.props.userRating} 
 									hoverHandler={ this.props.hoverHandler } />
 							);
 						})
@@ -21,7 +21,7 @@ class RatingPanel extends React.Component {
 				</div>
 
 				<div className='rating-panel-description'>
-					{this.props.rating.description}
+					{this.props.userRating.description}
 				</div>
 			</div>
 		);

@@ -40,21 +40,21 @@ class RatingIcon extends React.Component {
 		if(this.props.buttonValue < 0) {
 			return (
 				<FontAwesomeIcon 
-					className={'rating-icon fa-fw ' + (this.isHighlighted(this.props.rating.value, this.props.buttonValue) ? 'cooling' : 'not-highlighted')} 
+					className={'rating-icon fa-fw ' + (this.isHighlighted(this.props.userRating.value, this.props.buttonValue) ? 'cooling' : 'not-highlighted')} 
 					icon={ faSnowflake } 
 					size='3x' />
 			);
 		} else if(this.props.buttonValue === 0 || this.props.buttonValue === '0') {
 			return (
 				<FontAwesomeIcon 
-					className={'rating-icon fa-fw ' + (this.isHighlighted(this.props.rating.value, this.props.buttonValue) ? 'neutral' : 'not-highlighted')} 
+					className={'rating-icon fa-fw ' + (this.isHighlighted(this.props.userRating.value, this.props.buttonValue) ? 'neutral' : 'not-highlighted')} 
 					icon={ faCircle } 
 					size='3x' />
 			);
 		} else if(this.props.buttonValue > 0 ) {
 			return (
 				<FontAwesomeIcon 
-					className={'rating-icon fa-fw ' + (this.isHighlighted(this.props.rating.value, this.props.buttonValue) ? 'warming' : 'not-highlighted')} 
+					className={'rating-icon fa-fw ' + (this.isHighlighted(this.props.userRating.value, this.props.buttonValue) ? 'warming' : 'not-highlighted')} 
 					icon={ faFire } 
 					size='3x' />
 			);
