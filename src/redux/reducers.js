@@ -14,7 +14,7 @@ function ratingOptions(state = [], action) {
 
 function ratingDescriptions(state = {}, action) {
 	switch(action.type) {
-		case SET_RATING_OPTIONS:
+		case SET_RATING_DESCRIPTIONS:
 			return Object.assign({}, state, {
 				ratingDescriptions: action.ratingDescriptions
 			});
