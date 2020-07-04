@@ -2,6 +2,8 @@ import './Rate.css';
 import React from 'react';
 import RatingItemPanel from '../../components/RatingItemPanel/RatingItemPanel.js';
 import RatingPanel from '../../components/RatingPanel/RatingPanel.js';
+import { connect } from "react-redux";
+import _ from 'lodash';
 
 class Rate extends React.Component {
 	constructor(props) {
@@ -15,46 +17,20 @@ class Rate extends React.Component {
 			userRating: {
 				value: null,
 				description: null
-			},
-			ratingDescriptions: {},
-			ratingOptions: []
+			}
 		};
 
 	}
 
 	componentDidMount() {
-		this.fetchRatingOptions()
-			.then(data => this.setRatingOptions(data));
-		this.fetchRatingDescriptions()
-			.then(data => this.setRatingDescriptions(data));
 		this.fetchDummyItem()
 			.then(data => this.setRatingItem(data));
-	}
-
-	async fetchRatingOptions() {
-		let response = await fetch("/data/ratingOptions.json");
-		let data = await response.json();
-		return data;
-	}
-
-	async fetchRatingDescriptions() {
-		let response = await fetch("/data/ratingDescriptions.json");
-		let data = await response.json();
-		return data;
 	}
 
 	async fetchDummyItem() {
 		let response = await fetch("/data/ginger.json");
 		let data = await response.json();
 		return data;
-	}
-
-	setRatingOptions(arr) {
-		this.setState({ratingOptions: arr});
-	}
-
-	setRatingDescriptions(obj) {
-		this.setState({ratingDescriptions: obj});
 	}
 
 	setRatingItem(obj) {
@@ -65,7 +41,11 @@ class Rate extends React.Component {
 		let newRating = Object.assign({}, this.state.userRating);
 		if(value !== null) {
 			newRating.value = value;
-			newRating.description = this.state.ratingDescriptions[value];
+			if(_.isObject(this.props.ratingDescriptions)) {
+				newRating.description = this.props.ratingDescriptions[value];
+			} else {
+				newRating.description = "Loading Descriptions";
+			}
 			this.setState({userRating: newRating});
 		} else {
 			newRating.value = null;
@@ -86,7 +66,7 @@ class Rate extends React.Component {
 				</div>
 				<div>
 					<RatingPanel 
-						ratingOptions={this.state.ratingOptions}
+						ratingOptions={this.props.ratingOptions}
 						userRating={this.state.userRating} 
 						hoverHandler={ this.updateRating.bind(this) } />
 				</div>
@@ -95,4 +75,9 @@ class Rate extends React.Component {
 	}
 }
 
-export default Rate;
+const mapStateToProps = state => {
+	const { ratingOptions, ratingDescriptions } = state;
+	return { ratingOptions, ratingDescriptions };
+}
+
+export default connect(mapStateToProps)(Rate);
