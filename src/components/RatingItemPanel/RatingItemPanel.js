@@ -1,18 +1,43 @@
 import './RatingItemPanel.css';
 import React from 'react';
 
-const RatingItemPanel = (props) => (
-  <div>
-  	
-  	<div>
-    	<img src={props.ratingItem.pictureUrl} className='item-image' alt={'Picture of ' + props.ratingItem.name} />
-    </div>
+class RatingItemPanel extends React.Component {
+	createItemPicture() {
+		if(this.props.ratingItem) {
+			return (
+				<div>
+					<img src={this.props.ratingItem.pictureUrl} className='item-image' alt={'Picture of ' + this.props.ratingItem.name} />
+				</div>
+			);
+		} else {
+			return (
+				<div>Loading</div>
+			);
+		}
+	}
 
-    <div className='item-name'>
-    	{props.ratingItem.name}
-    </div>
-    
-  </div>
-);
+	createItemName() {
+		if(this.props.ratingItem) {
+			return (
+				<div className='item-name'>
+					{this.props.ratingItem.name}
+				</div>
+			);
+		} else {
+			return (
+				<div>Loading</div>
+			);
+		}
+	}
+
+	render() {
+		return (
+			<div>
+				{ this.createItemPicture() }
+				{ this.createItemName() }
+			</div>
+		);
+	}
+}
 
 export default RatingItemPanel;

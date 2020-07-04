@@ -44,7 +44,7 @@ class Rate extends React.Component {
 			if(_.isObject(this.props.ratingDescriptions)) {
 				newRating.description = this.props.ratingDescriptions[value];
 			} else {
-				newRating.description = "Loading Descriptions";
+				newRating.description = null;
 			}
 			this.setState({userRating: newRating});
 		} else {
