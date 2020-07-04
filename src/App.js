@@ -2,7 +2,8 @@ import React from 'react';
 import Navigation from './Navigation.js';
 import Main from './Main.js';
 
-import store from './redux/store'
+import store from './redux/store';
+import { connect } from 'react-redux';
 import { setRatingOptions, setRatingDescriptions } from './redux/actions.js';
 import rootReducer from './redux/reducers.js';
 
@@ -13,13 +14,17 @@ class App extends React.Component {
 	componentDidMount() {
 		this.fetchRatingOptions()
 			.then(data => {
-				let action = setRatingOptions(data);
-				console.log(action);
+				this.props.setRatingOptions(data);
+			})
+			.finally(() => {
+				console.log(store.getState());
 			});
 		this.fetchRatingDescriptions()
 			.then(data => {
-				let action = setRatingDescriptions(data);
-				console.log(action);
+				this.props.setRatingDescriptions(data);
+			})
+			.finally(() => {
+				console.log(store.getState());
 			});
 	}
 
@@ -45,4 +50,7 @@ class App extends React.Component {
 	}
 } 
 
-export default App;
+export default connect(
+	null,
+	{ setRatingOptions, setRatingDescriptions }
+)(App);
