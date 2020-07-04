@@ -5,13 +5,15 @@ class RatingItemPanel extends React.Component {
 	createItemPicture() {
 		if(this.props.ratingItem) {
 			return (
-				<div>
+				<div className='item-image-container'>
 					<img src={this.props.ratingItem.pictureUrl} className='item-image' alt={'Picture of ' + this.props.ratingItem.name} />
 				</div>
 			);
 		} else {
 			return (
-				<div>Loading</div>
+				<div className='item-image-container'>
+					Loading
+				</div>
 			);
 		}
 	}
@@ -25,7 +27,9 @@ class RatingItemPanel extends React.Component {
 			);
 		} else {
 			return (
-				<div>Loading</div>
+				<div>
+					Loading
+				</div>
 			);
 		}
 	}

@@ -23,7 +23,11 @@ class RatingPanel extends React.Component {
 				</div>
 			);
 		} else {
-			return (<div>Loading</div>);
+			return (
+				<div>
+					Loading
+				</div>
+			);
 		}
 	}
 
@@ -36,7 +40,9 @@ class RatingPanel extends React.Component {
 			);
 		} else {
 			return (
-				<div>Loading</div>
+				<div>
+					Loading
+				</div>
 			);
 		}
 	}
