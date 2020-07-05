@@ -18,27 +18,14 @@ class RatingItemPanel extends React.Component {
 		}
 	}
 
-	createItemName() {
-		if(this.props.ratingItem) {
-			return (
-				<div className='item-name'>
-					{this.props.ratingItem.name}
-				</div>
-			);
-		} else {
-			return (
-				<div>
-					Loading
-				</div>
-			);
-		}
-	}
-
 	render() {
 		return (
 			<div>
 				{ this.createItemPicture() }
-				{ this.createItemName() }
+
+				<div className='item-name'>
+					{this.props.ratingItem.name}
+				</div>
 			</div>
 		);
 	}

@@ -1,18 +1,29 @@
 import './RatingButton.css';
 import React from 'react';
-import RatingIcon from '../RatingIcon/RatingIcon.js'
+import RatingIcon from '../RatingIcon/RatingIcon.js';
 
-const RatingButton = (props) => (
-	<button 
-		className="rating-button" 
-		value={props.buttonValue} 
-		onMouseEnter={ () => props.hoverHandler(props.buttonValue) } 
-		onMouseLeave={ () => props.hoverHandler(null) }>
+class RatingButton extends React.Component {
+	ratingButtonClick(buttonValue) {
+		console.log(buttonValue);
+	}
 
-		<RatingIcon 
-			buttonValue={props.buttonValue} 
-			userRating={props.userRating} />
-	</button>
-); 
+	render() {
+		return (
+			<button 
+				type="submit"
+				className="rating-button" 
+				value={ this.props.buttonValue } 
+				onMouseEnter={ () => this.props.hoverHandler(this.props.buttonValue) } 
+				onMouseLeave={ () => this.props.hoverHandler(null) }
+				onClick={ () => this.ratingButtonClick(this.props.buttonValue) }>
+
+				<RatingIcon 
+					buttonValue={ this.props.buttonValue } 
+					userRating={ this.props.userRating } />
+			</button>
+		); 
+	}
+} 
+
 
 export default RatingButton;

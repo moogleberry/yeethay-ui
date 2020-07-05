@@ -31,27 +31,14 @@ class RatingPanel extends React.Component {
 		}
 	}
 
-	createRatingDescription() {
-		if(this.props.userRating) {
-			return (
-				<div className='rating-panel-description'>
-					{ this.props.userRating.description }
-				</div>
-			);
-		} else {
-			return (
-				<div>
-					Loading
-				</div>
-			);
-		}
-	}
-
 	render() {
 		return (
 			<div>
 				{ this.createRatingButtons() }
-				{ this.createRatingDescription() }
+
+				<div className='rating-panel-description'>
+					{ this.props.userRating.description }
+				</div>
 			</div>
 		);
 	}

@@ -2,6 +2,7 @@ import './Rate.css';
 import React from 'react';
 import RatingItemPanel from '../../components/RatingItemPanel/RatingItemPanel.js';
 import RatingPanel from '../../components/RatingPanel/RatingPanel.js';
+import NextButton from '../../components/NextButton/NextButton.js';
 import { connect } from "react-redux";
 import _ from 'lodash';
 
@@ -19,7 +20,6 @@ class Rate extends React.Component {
 				description: null
 			}
 		};
-
 	}
 
 	componentDidMount() {
@@ -34,7 +34,7 @@ class Rate extends React.Component {
 	}
 
 	setRatingItem(obj) {
-		this.setState({ratingItem: obj});
+		this.setState({ ratingItem: obj });
 	}
 
 	updateRating(value) {
@@ -46,11 +46,11 @@ class Rate extends React.Component {
 			} else {
 				newRating.description = null;
 			}
-			this.setState({userRating: newRating});
+			this.setState({ userRating: newRating });
 		} else {
 			newRating.value = null;
 			newRating.description = null;
-			this.setState({userRating: newRating});
+			this.setState({ userRating: newRating });
 		}
 	}
 
@@ -62,13 +62,16 @@ class Rate extends React.Component {
 				</h2>
 				<div className='rate-item-panel'>
 					<RatingItemPanel 
-						ratingItem={this.state.ratingItem} />
+						ratingItem={ this.state.ratingItem } />
 				</div>
 				<div>
 					<RatingPanel 
-						ratingOptions={this.props.ratingOptions}
-						userRating={this.state.userRating} 
+						ratingOptions={ this.props.ratingOptions }
+						userRating={ this.state.userRating } 
 						hoverHandler={ this.updateRating.bind(this) } />
+				</div>
+				<div>
+					<NextButton />
 				</div>
 			</div>
 		);
