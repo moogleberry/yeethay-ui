@@ -13,6 +13,7 @@ class RatingButton extends React.Component {
 				type="submit"
 				className="rating-button" 
 				value={ this.props.buttonValue } 
+				aria-label={ this.props.buttonDescription }
 				onMouseEnter={ () => this.props.hoverHandler(this.props.buttonValue) } 
 				onMouseLeave={ () => this.props.hoverHandler(null) }
 				onClick={ () => this.ratingButtonClick(this.props.buttonValue) }>

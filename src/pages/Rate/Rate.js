@@ -41,8 +41,15 @@ class Rate extends React.Component {
 		let newRating = Object.assign({}, this.state.userRating);
 		if(value !== null) {
 			newRating.value = value;
-			if(_.isObject(this.props.ratingDescriptions)) {
-				newRating.description = this.props.ratingDescriptions[value];
+			if(_.isArray(this.props.ratingOptions)) {
+				let foundRating = _.find(this.props.ratingOptions, function(ratingOption) {
+					return ratingOption.value === value;
+				});
+				if(foundRating) {
+					newRating.description = foundRating.description;
+				} else {
+					newRating.description = null;
+				}
 			} else {
 				newRating.description = null;
 			}
@@ -79,8 +86,8 @@ class Rate extends React.Component {
 }
 
 const mapStateToProps = state => {
-	const { ratingOptions, ratingDescriptions } = state;
-	return { ratingOptions, ratingDescriptions };
+	const { ratingOptions } = state;
+	return { ratingOptions };
 }
 
 export default connect(mapStateToProps)(Rate);

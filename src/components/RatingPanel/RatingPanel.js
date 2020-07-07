@@ -10,11 +10,12 @@ class RatingPanel extends React.Component {
 			return (
 				<div className='rating-panel-buttons'>
 					{
-						this.props.ratingOptions.map((buttonValue) => {
+						_.map(this.props.ratingOptions, (ratingOption) => {
 							return (
 								<RatingButton 
-									key={buttonValue}
-									buttonValue={buttonValue} 
+									key={ratingOption.value}
+									buttonValue={ratingOption.value} 
+									buttonDescription={ratingOption.description}
 									userRating={this.props.userRating} 
 									hoverHandler={ this.props.hoverHandler } />
 							);
