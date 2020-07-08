@@ -1,11 +1,16 @@
 import "./Rate.css";
+
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+
 import _ from "lodash";
+
 import RatingItemPanel from "../../components/RatingItemPanel/RatingItemPanel.js";
 import RatingPanel from "../../components/RatingPanel/RatingPanel.js";
 import NextButton from "../../components/NextButton/NextButton.js";
+
+import { fetchUnratedItem } from "../../helpers/httpCalls";
 
 class Rate extends React.Component {
 	static get propTypes() {
@@ -30,14 +35,12 @@ class Rate extends React.Component {
 	}
 
 	componentDidMount() {
-		this.fetchDummyItem()
+		this.fetchUnratedItem()
 			.then((data) => this.setRatingItem(data));
 	}
 
-	async fetchDummyItem() {
-		const response = await fetch("/data/ginger.json");
-		const data = await response.json();
-		return data;
+	async fetchUnratedItem() {
+		return await fetchUnratedItem();
 	}
 
 	setRatingItem(obj) {
