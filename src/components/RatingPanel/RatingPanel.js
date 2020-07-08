@@ -1,35 +1,41 @@
-import './RatingPanel.css';
-import React from 'react';
-import RatingButton from '../RatingButton/RatingButton.js';
-import _ from 'lodash';
+import "./RatingPanel.css";
+import React from "react";
+import PropTypes from "prop-types";
+import _ from "lodash";
+import RatingButton from "../RatingButton/RatingButton.js";
 
 class RatingPanel extends React.Component {
+	static get propTypes() {
+		return {
+			ratingOptions: PropTypes.array,
+			hoverHandler: PropTypes.func,
+			userRating: PropTypes.object
+		};
+	}
 
 	createRatingButtons() {
-		if(_.isArray(this.props.ratingOptions)) {
+		if (_.isArray(this.props.ratingOptions)) {
 			return (
-				<div className='rating-panel-buttons'>
+				<div className="rating-panel-buttons">
 					{
-						_.map(this.props.ratingOptions, (ratingOption) => {
-							return (
-								<RatingButton 
-									key={ratingOption.value}
-									buttonValue={ratingOption.value} 
-									buttonDescription={ratingOption.description}
-									userRating={this.props.userRating} 
-									hoverHandler={ this.props.hoverHandler } />
-							);
-						})
+						_.map(this.props.ratingOptions, (ratingOption) => (
+							<RatingButton
+								key={ratingOption.value}
+								buttonValue={ratingOption.value}
+								buttonDescription={ratingOption.description}
+								userRating={this.props.userRating}
+								hoverHandler={this.props.hoverHandler}
+							/>
+						))
 					}
 				</div>
 			);
-		} else {
-			return (
-				<div>
-					Loading
-				</div>
-			);
 		}
+		return (
+			<div>
+        Loading
+			</div>
+		);
 	}
 
 	render() {
@@ -37,12 +43,12 @@ class RatingPanel extends React.Component {
 			<div>
 				{ this.createRatingButtons() }
 
-				<div className='rating-panel-description'>
+				<div className="rating-panel-description">
 					{ this.props.userRating.description }
 				</div>
 			</div>
 		);
 	}
-} 
+}
 
 export default RatingPanel;

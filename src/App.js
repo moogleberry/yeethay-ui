@@ -1,38 +1,45 @@
-import React from 'react';
-import Navigation from './Navigation.js';
-import Main from './Main.js';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import Navigation from "./Navigation";
+import Main from "./Main";
 
-import { connect } from 'react-redux';
-import { setRatingOptions } from './redux/actions.js';
+import { setRatingOptions } from "./redux/actions";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 class App extends React.Component {
+	static get propTypes() {
+		return {
+			setRatingOptions: PropTypes.array
+		};
+	}
+
 	componentDidMount() {
 		this.fetchRatingOptions()
-			.then(data => {
+			.then((data) => {
 				this.props.setRatingOptions(data);
 			});
 	}
 
 	async fetchRatingOptions() {
-		let response = await fetch("/data/ratingOptions.json");
-		let data = await response.json();
+		const response = await fetch("/data/ratingOptions.json");
+		const data = await response.json();
 		return data;
 	}
 
 	render() {
 		return (
-			<div className='App'>
+			<div className="App">
 				<Navigation />
 				<Main />
 			</div>
 		);
 	}
-} 
+}
 
 export default connect(
 	null,
-	{ setRatingOptions }
+	{ setRatingOptions },
 )(App);

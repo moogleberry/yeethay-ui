@@ -1,35 +1,42 @@
-import './Rate.css';
-import React from 'react';
-import RatingItemPanel from '../../components/RatingItemPanel/RatingItemPanel.js';
-import RatingPanel from '../../components/RatingPanel/RatingPanel.js';
-import NextButton from '../../components/NextButton/NextButton.js';
+import "./Rate.css";
+import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import _ from 'lodash';
+import _ from "lodash";
+import RatingItemPanel from "../../components/RatingItemPanel/RatingItemPanel.js";
+import RatingPanel from "../../components/RatingPanel/RatingPanel.js";
+import NextButton from "../../components/NextButton/NextButton.js";
 
 class Rate extends React.Component {
+	static get propTypes() {
+		return {
+			ratingOptions: PropTypes.array
+		};
+	}
+
 	constructor(props) {
 		super(props);
 
 		this.state = {
 			ratingItem: {
 				name: null,
-				pictureUrl: null
+				pictureUrl: null,
 			},
 			userRating: {
 				value: null,
-				description: null
-			}
+				description: null,
+			},
 		};
 	}
 
 	componentDidMount() {
 		this.fetchDummyItem()
-			.then(data => this.setRatingItem(data));
+			.then((data) => this.setRatingItem(data));
 	}
 
 	async fetchDummyItem() {
-		let response = await fetch("/data/ginger.json");
-		let data = await response.json();
+		const response = await fetch("/data/ginger.json");
+		const data = await response.json();
 		return data;
 	}
 
@@ -38,14 +45,12 @@ class Rate extends React.Component {
 	}
 
 	updateRating(value) {
-		let newRating = Object.assign({}, this.state.userRating);
-		if(value !== null) {
+		const newRating = { ...this.state.userRating };
+		if (value !== null) {
 			newRating.value = value;
-			if(_.isArray(this.props.ratingOptions)) {
-				let foundRating = _.find(this.props.ratingOptions, function(ratingOption) {
-					return ratingOption.value === value;
-				});
-				if(foundRating) {
+			if (_.isArray(this.props.ratingOptions)) {
+				const foundRating = _.find(this.props.ratingOptions, (ratingOption) => ratingOption.value === value);
+				if (foundRating) {
 					newRating.description = foundRating.description;
 				} else {
 					newRating.description = null;
@@ -64,18 +69,20 @@ class Rate extends React.Component {
 	render() {
 		return (
 			<div>
-				<h2 className='page-title'>
-					Is It Yeet Hay?
+				<h2 className="page-title">
+          Is It Yeet Hay?
 				</h2>
-				<div className='rate-item-panel'>
-					<RatingItemPanel 
-						ratingItem={ this.state.ratingItem } />
+				<div className="rate-item-panel">
+					<RatingItemPanel
+						ratingItem={this.state.ratingItem}
+					/>
 				</div>
 				<div>
-					<RatingPanel 
-						ratingOptions={ this.props.ratingOptions }
-						userRating={ this.state.userRating } 
-						hoverHandler={ this.updateRating.bind(this) } />
+					<RatingPanel
+						ratingOptions={this.props.ratingOptions}
+						userRating={this.state.userRating}
+						hoverHandler={this.updateRating.bind(this)}
+					/>
 				</div>
 				<div>
 					<NextButton />
@@ -85,9 +92,9 @@ class Rate extends React.Component {
 	}
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
 	const { ratingOptions } = state;
 	return { ratingOptions };
-}
+};
 
 export default connect(mapStateToProps)(Rate);

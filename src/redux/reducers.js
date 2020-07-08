@@ -1,14 +1,14 @@
-import { combineReducers } from 'redux'
-import { SET_RATING_OPTIONS } from './actions.js';
+import { combineReducers } from "redux";
+import { SET_RATING_OPTIONS } from "./actions.js";
 
 function ratingOptions(state = [], action) {
-	switch(action.type) {
-		case SET_RATING_OPTIONS:
-			return [
-				...action.ratingOptions
-			];
-		default:
-			return state;
+	switch (action.type) {
+	case SET_RATING_OPTIONS:
+		return [
+			...action.ratingOptions,
+		];
+	default:
+		return state;
 	}
 }
 
