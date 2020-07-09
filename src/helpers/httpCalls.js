@@ -17,3 +17,10 @@ export async function fetchRandomItem() {
 	const data = await response.json();
 	return data;
 }
+
+export async function fetchUnratedItem() {
+	const path = "/rest/unratedItem";
+	const response = await fetch(serverInfo.url + serverInfo.port + path);
+	const data = await response.json();
+	return data;
+}
