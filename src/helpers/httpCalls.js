@@ -11,8 +11,8 @@ export async function fetchRatingOptions() {
 	return data;
 }
 
-export async function fetchUnratedItem() {
-	const path = "/rest/unratedItem";
+export async function fetchRandomItem() {
+	const path = "/rest/randomItem";
 	const response = await fetch(serverInfo.url + serverInfo.port + path);
 	const data = await response.json();
 	return data;

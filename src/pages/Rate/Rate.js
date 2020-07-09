@@ -10,7 +10,7 @@ import RatingItemPanel from "../../components/RatingItemPanel/RatingItemPanel.js
 import RatingPanel from "../../components/RatingPanel/RatingPanel.js";
 import NextButton from "../../components/NextButton/NextButton.js";
 
-import { fetchUnratedItem } from "../../helpers/httpCalls";
+import { fetchRandomItem } from "../../helpers/httpCalls";
 
 class Rate extends React.Component {
 	static get propTypes() {
@@ -35,12 +35,12 @@ class Rate extends React.Component {
 	}
 
 	componentDidMount() {
-		this.fetchUnratedItem()
+		this.fetchRandomItem()
 			.then((data) => this.setRatingItem(data));
 	}
 
-	async fetchUnratedItem() {
-		return await fetchUnratedItem();
+	async fetchRandomItem() {
+		return await fetchRandomItem();
 	}
 
 	setRatingItem(obj) {
