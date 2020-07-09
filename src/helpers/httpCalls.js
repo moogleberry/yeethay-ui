@@ -1,12 +1,19 @@
 
+let serverInfo = {
+	"url": "http://localhost",
+	"port": ":3001"
+};
+
 export async function fetchRatingOptions() {
-	const response = await fetch("http://localhost:3001/static/data/ratingOptions.json");
+	const path = "/rest/ratingOptions";
+	const response = await fetch(serverInfo.url + serverInfo.port + path);
 	const data = await response.json();
 	return data;
 }
 
 export async function fetchUnratedItem() {
-	const response = await fetch("http://localhost:3001/static/data/ginger.json");
+	const path = "/rest/unratedItem";
+	const response = await fetch(serverInfo.url + serverInfo.port + path);
 	const data = await response.json();
 	return data;
 }
