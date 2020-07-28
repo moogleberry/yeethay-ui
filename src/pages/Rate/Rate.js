@@ -7,7 +7,8 @@ import { connect } from "react-redux";
 import _ from "lodash";
 
 import RatingItemPanel from "../../components/RatingItemPanel/RatingItemPanel.js";
-import RatingPanel from "../../components/RatingPanel/RatingPanel.js";
+import RatingButtonGroup from "../../components/RatingButtonGroup/RatingButtonGroup.js";
+import RatingDescription from "../../components/RatingDescription/RatingDescription.js";
 import NextButton from "../../components/NextButton/NextButton.js";
 
 import { fetchRandomItem, fetchUnratedItem } from "../../helpers/httpCalls";
@@ -81,18 +82,21 @@ class Rate extends React.Component {
 				</h2>
 				<div className="rate-item-panel">
 					<RatingItemPanel
-						ratingItem={this.state.ratingItem}
-					/>
+						ratingItem={this.state.ratingItem} />
 				</div>
 				<div>
-					<RatingPanel
-						ratingOptions={this.props.ratingOptions}
-						userRating={this.state.userRating}
-						hoverHandler={this.updateRating.bind(this)}
-					/>
+					<RatingButtonGroup 
+						ratingOptions={this.props.ratingOptions} 
+						userRating={this.state.userRating} 
+						hoverHandler={this.updateRating.bind(this)} />
 				</div>
 				<div>
-					<NextButton onClick={ () => this.onNextButtonClick() } />
+					<RatingDescription
+						userRating={this.state.userRating} />
+				</div>
+				<div>
+					<NextButton 
+						onClick={ () => this.onNextButtonClick() } />
 				</div>
 			</div>
 		);
