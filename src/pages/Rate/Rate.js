@@ -10,7 +10,7 @@ import RatingItemPanel from "../../components/RatingItemPanel/RatingItemPanel.js
 import RatingPanel from "../../components/RatingPanel/RatingPanel.js";
 import NextButton from "../../components/NextButton/NextButton.js";
 
-import { fetchRandomItem } from "../../helpers/httpCalls";
+import { fetchRandomItem, fetchUnratedItem } from "../../helpers/httpCalls";
 
 class Rate extends React.Component {
 	static get propTypes() {
@@ -23,24 +23,23 @@ class Rate extends React.Component {
 		super(props);
 
 		this.state = {
-			ratingItem: {
-				name: null,
-				pictureUrl: null,
-			},
-			userRating: {
-				value: null,
-				description: null,
-			},
+			ratingItem: {},
+			userRating: {},
 		};
 	}
 
 	componentDidMount() {
-		this.fetchRandomItem()
+		this.loadRandomItem();
+	}
+
+	async loadRandomItem() {
+		return await fetchRandomItem()
 			.then((data) => this.setRatingItem(data));
 	}
 
-	async fetchRandomItem() {
-		return await fetchRandomItem();
+	async loadUnratedItem() {
+		return await fetchUnratedItem()
+			.then((data) => this.setRatingItem(data));
 	}
 
 	setRatingItem(obj) {
@@ -69,6 +68,11 @@ class Rate extends React.Component {
 		}
 	}
 
+	onNextButtonClick() {
+		// this.loadUnratedItem(); // always lychee lol
+		this.loadRandomItem();
+	}
+
 	render() {
 		return (
 			<div>
@@ -88,7 +92,7 @@ class Rate extends React.Component {
 					/>
 				</div>
 				<div>
-					<NextButton />
+					<NextButton onClick={ () => this.onNextButtonClick() } />
 				</div>
 			</div>
 		);

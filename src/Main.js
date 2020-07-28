@@ -6,8 +6,6 @@ import Rate from "./pages/Rate/Rate.js";
 
 const Main = () => (
 	<Switch>
-		{" "}
-		{/* The Switch decides which component to show based on the current URL. */}
 		<Route exact path="/" component={Home} />
 		<Route exact path="/rate" component={Rate} />
 	</Switch>
