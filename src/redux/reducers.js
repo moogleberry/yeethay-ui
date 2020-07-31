@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { SET_RATING_OPTIONS } from "./actions.js";
+import { SET_RATING_OPTIONS } from "./actions";
 
 function ratingOptions(state = [], action) {
 	switch (action.type) {

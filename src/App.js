@@ -3,9 +3,11 @@ import "./App.css";
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Switch, Route } from "react-router-dom";
 
-import Navigation from "./Navigation";
-import Main from "./Main";
+import Navigation from "./components/Navigation/Navigation";
+import Home from "./components/Home/Home";
+import Rate from "./components/Rate/Rate";
 
 import { setRatingOptions } from "./redux/actions";
 import { fetchRatingOptions } from "./helpers/httpCalls";
@@ -15,7 +17,7 @@ class App extends React.Component {
 		return {
 			setRatingOptions: PropTypes.func
 		};
-	}
+	} 
 
 	componentDidMount() {
 		this.fetchRatingOptions()
@@ -32,7 +34,10 @@ class App extends React.Component {
 		return (
 			<div className="App">
 				<Navigation />
-				<Main />
+				<Switch>
+					<Route exact path="/" component={Home} />
+					<Route exact path="/rate" component={Rate} />
+				</Switch>
 			</div>
 		);
 	}

@@ -6,10 +6,10 @@ import { connect } from "react-redux";
 
 import _ from "lodash";
 
-import RatingItemPanel from "../../components/RatingItemPanel/RatingItemPanel.js";
-import RatingButtonGroup from "../../components/RatingButtonGroup/RatingButtonGroup.js";
-import RatingDescription from "../../components/RatingDescription/RatingDescription.js";
-import NextButton from "../../components/NextButton/NextButton.js";
+import RatingItemPanel from "../RatingItemPanel/RatingItemPanel";
+import RatingButtonGroup from "../RatingButtonGroup/RatingButtonGroup";
+import RatingDescription from "../RatingDescription/RatingDescription";
+import NextButton from "../NextButton/NextButton";
 
 import { fetchRandomItem, fetchUnratedItem } from "../../helpers/httpCalls";
 
