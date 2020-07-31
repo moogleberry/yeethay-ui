@@ -11,7 +11,7 @@ import RatingButtonGroup from "../RatingButtonGroup/RatingButtonGroup";
 import RatingDescription from "../RatingDescription/RatingDescription";
 import NextButton from "../NextButton/NextButton";
 
-import { fetchRandomItem, fetchUnratedItem } from "../../helpers/httpCalls";
+import { fetchRandomItem, fetchUnratedItem, rateItem } from "../../helpers/httpCalls";
 
 class Rate extends React.Component {
 	static get propTypes() {
@@ -26,6 +26,7 @@ class Rate extends React.Component {
 		this.state = {
 			ratingItem: {},
 			userRating: {},
+			sendingRating: false
 		};
 	}
 
@@ -43,16 +44,16 @@ class Rate extends React.Component {
 			.then((data) => this.setRatingItem(data));
 	}
 
-	setRatingItem(obj) {
-		this.setState({ ratingItem: obj });
+	setRatingItem(ratingItem) {
+		this.setState({ ratingItem: ratingItem });
 	}
 
-	updateRating(value) {
+	updateRating(ratingValue) {
 		const newRating = { ...this.state.userRating };
-		if (value !== null) {
-			newRating.value = value;
+		if (ratingValue !== null) {
+			newRating.value = ratingValue;
 			if (_.isArray(this.props.ratingOptions)) {
-				const foundRating = _.find(this.props.ratingOptions, (ratingOption) => ratingOption.value === value);
+				const foundRating = _.find(this.props.ratingOptions, (ratingOption) => ratingOption.value === newRating.value);
 				if (foundRating) {
 					newRating.description = foundRating.description;
 				} else {
@@ -67,6 +68,17 @@ class Rate extends React.Component {
 			newRating.description = null;
 			this.setState({ userRating: newRating });
 		}
+	}
+
+	ratingClickHandler(ratingValue) {
+		this.setState({sendingRating: true});
+		rateItem(this.state.ratingItem.id, ratingValue, "foo")
+			.then((response) => {
+				this.loadRandomItem();
+			})
+			.finally(() => {
+				this.setState({sendingRating: false});
+			});
 	}
 
 	onNextButtonClick() {
@@ -88,7 +100,8 @@ class Rate extends React.Component {
 					<RatingButtonGroup 
 						ratingOptions={this.props.ratingOptions} 
 						userRating={this.state.userRating} 
-						hoverHandler={this.updateRating.bind(this)} />
+						hoverHandler={this.updateRating.bind(this)} 
+						clickHandler={this.ratingClickHandler.bind(this)} />
 				</div>
 				<div>
 					<RatingDescription

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import _ from "lodash";
 import RatingButton from "../RatingButton/RatingButton.js";
 
-const RatingButtonGroup = ({ratingOptions, userRating, hoverHandler}) => {
+const RatingButtonGroup = ({ratingOptions, userRating, hoverHandler, clickHandler}) => {
 	if (_.isArray(ratingOptions)) {
 
 		return (
@@ -16,6 +16,7 @@ const RatingButtonGroup = ({ratingOptions, userRating, hoverHandler}) => {
 							buttonDescription={ratingOption.description}
 							userRating={userRating}
 							hoverHandler={hoverHandler}
+							clickHandler={clickHandler}
 						/>
 					))
 				}

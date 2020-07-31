@@ -3,11 +3,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import RatingIcon from "../RatingIcon/RatingIcon.js";
 
-function ratingButtonClick(buttonValue) {
-	console.log(buttonValue);
-}
-
-const RatingButton = ({buttonValue, buttonDescription, hoverHandler, userRating}) => {
+const RatingButton = ({buttonValue, buttonDescription, hoverHandler, userRating, clickHandler}) => {
 	return (
 		<button
 			type="submit"
@@ -16,7 +12,7 @@ const RatingButton = ({buttonValue, buttonDescription, hoverHandler, userRating}
 			aria-label={buttonDescription}
 			onMouseEnter={() => hoverHandler(buttonValue)}
 			onMouseLeave={() => hoverHandler(null)}
-			onClick={() => ratingButtonClick(buttonValue)}
+			onClick={() => clickHandler(buttonValue)}
 		>
 
 			<RatingIcon
